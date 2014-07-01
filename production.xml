@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tryton>
+    <data>
+
+        <record model="ir.ui.view" id="production_quality_test_view_form">
+            <field name="model">production.quality.test</field>
+            <field name="type">form</field>
+            <field name="name">production_quality_test_form</field>
+        </record>
+        <record model="ir.ui.view" id="production_quality_test_view_list">
+            <field name="model">production.quality.test</field>
+            <field name="type">tree</field>
+            <field name="name">production_quality_test_list</field>
+        </record>
+
+        <record model="ir.ui.view" id="production_view_form">
+            <field name="model">production</field>
+            <field name="type">form</field>
+            <field name="name">production_form</field>
+            <field name="inherit" ref="production.production_view_form"/>
+        </record>
+
+        <record model="ir.ui.view" id="template_view_form">
+            <field name="model">product.template</field>
+            <field name="type">form</field>
+            <field name="inherit" ref="product.template_view_form"/>
+            <field name="name">template_form</field>
+        </record>
+    </data>
+</tryton>

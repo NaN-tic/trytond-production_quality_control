@@ -1,0 +1,59 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:product.template,quality_template:"
+msgid "Quality Template"
+msgstr "Plantilla de calidad"
+
+msgctxt "field:production,quality_controls:"
+msgid "Quality Test"
+msgstr "Test de calidad"
+
+msgctxt "field:production,quality_template:"
+msgid "Quality Template"
+msgstr "Plantilla de calidad"
+
+msgctxt "field:production.quality.test,create_date:"
+msgid "Create Date"
+msgstr "Fecha de creación"
+
+msgctxt "field:production.quality.test,create_uid:"
+msgid "Create User"
+msgstr "Usuario de creación"
+
+msgctxt "field:production.quality.test,id:"
+msgid "ID"
+msgstr "Identificador"
+
+msgctxt "field:production.quality.test,production:"
+msgid "Production"
+msgstr "Producción"
+
+msgctxt "field:production.quality.test,rec_name:"
+msgid "Name"
+msgstr "Nombre"
+
+msgctxt "field:production.quality.test,test:"
+msgid "Test"
+msgstr "Test"
+
+msgctxt "field:production.quality.test,write_date:"
+msgid "Write Date"
+msgstr "Fecha modificación"
+
+msgctxt "field:production.quality.test,write_uid:"
+msgid "Write User"
+msgstr "Usuario modificación"
+
+msgctxt "model:production.quality.test,name:"
+msgid "Production Quality Test"
+msgstr "Test de calidad producción"
+
+msgctxt "view:production.quality.test:"
+msgid "Production Quality Test"
+msgstr "Test de calidad producción"
+
+msgctxt "view:production:"
+msgid "Quality"
+msgstr "Calidad"

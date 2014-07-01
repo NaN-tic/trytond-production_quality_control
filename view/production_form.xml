@@ -1,0 +1,9 @@
+<data>
+    <xpath expr="/form/notebook" position="inside">
+        <page id="quality" string="Quality">
+            <label name="quality_template"/>
+            <field name="quality_template"/>
+            <field name="quality_tests" colspan="4"/>
+        </page>
+    </xpath>
+</data>
