@@ -26,10 +26,9 @@ class Production:
 
     @fields.depends('product')
     def on_change_product(self):
-        res = super(Production, self).on_change_product()
+        super(Production, self).on_change_product()
         if self.product and self.product.template.quality_template:
-            res['quality_template'] = self.product.template.quality_template.id
-        return res
+            self.quality_template = self.product.template.quality_template
 
     @classmethod
     def compute_request(cls, product, warehouse, quantity, date, company):
