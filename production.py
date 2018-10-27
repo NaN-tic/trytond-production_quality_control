@@ -1,20 +1,20 @@
 #The COPYRIGHT file at the top level of this repository contains the full
 #copyright notices and license terms.
-from trytond.model import ModelSQL, ModelView, fields
+from trytond.model import fields
 from trytond.pool import PoolMeta
 from trytond.pyson import Eval
-from trytond.transaction import Transaction
 
 __all__ = ['Template', 'Production']
-__metaclass__ = PoolMeta
 
 
 class Template:
+    __metaclass__ = PoolMeta
     __name__ = 'product.template'
     quality_template = fields.Many2One('quality.template', 'Quality Template')
 
 
 class Production:
+    __metaclass__ = PoolMeta
     __name__ = 'production'
 
     quality_template = fields.Many2One('quality.template', 'Quality Template')
