@@ -7,14 +7,12 @@ from trytond.pyson import Eval
 __all__ = ['Template', 'Production']
 
 
-class Template:
-    __metaclass__ = PoolMeta
+class Template(metaclass=PoolMeta):
     __name__ = 'product.template'
     quality_template = fields.Many2One('quality.template', 'Quality Template')
 
 
-class Production:
-    __metaclass__ = PoolMeta
+class Production(metaclass=PoolMeta):
     __name__ = 'production'
 
     quality_template = fields.Many2One('quality.template', 'Quality Template')
