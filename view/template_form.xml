@@ -6,5 +6,6 @@
             position="before">
         <label name="quality_template"/>
         <field name="quality_template"/>
+        <newline/>
     </xpath>
 </data>
