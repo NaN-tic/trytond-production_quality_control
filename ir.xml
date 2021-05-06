@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<tryton>
+    <data>
+        <record model="ir.cron" id="cron_create_quality_test">
+            <field name="interval_number" eval="5"/>
+            <field name="interval_type">minutes</field>
+            <field name="method">production|create_quality_tests</field>
+        </record>
+    </data>
+</tryton>
