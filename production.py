@@ -81,14 +81,18 @@ class Production(metaclass=PoolMeta):
         to_save = []
         for production in productions:
             for quality_template in production.quality_templates:
-                if ((datetime.now() - production.time_since_quality_control
-                        ).seconds/60 >= quality_template.interval):
-                    #create quality_test
-                    test = QualityTest()
-                    test.document = production
-                    test.templates = [quality_template.quality_template]
-                    test.company = quality_template.company
-                    to_save.append(test)
+                total_time_since_quality_control = (datetime.now() -
+                    production.time_since_quality_control).seconds/60
+                if (total_time_since_quality_control >=
+                        quality_template.interval):
+                    for quality_contol in range(int(
+                            total_time_since_quality_control/
+                            quality_template.interval)):
+                        test = QualityTest()
+                        test.document = production
+                        test.templates = [quality_template.quality_template]
+                        test.company = quality_template.company
+                        to_save.append(test)
 
                     production.time_since_quality_control = datetime.now()
                     production.save()
