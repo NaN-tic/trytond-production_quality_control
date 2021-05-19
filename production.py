@@ -1,6 +1,6 @@
 #The COPYRIGHT file at the top level of this repository contains the full
 #copyright notices and license terms.
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from trytond.model import fields, ModelSQL, ModelView
 from trytond.pool import Pool, PoolMeta
@@ -12,7 +12,8 @@ from trytond.i18n import gettext
 
 class Template(metaclass=PoolMeta):
     __name__ = 'product.template'
-    quality_templates = fields.One2Many('product.template-quality.template', 'template', "Quality Templates")
+    quality_templates = fields.One2Many('product.template-quality.template',
+        'template', "Quality Templates")
 
 
 class Production(metaclass=PoolMeta):
@@ -50,9 +51,11 @@ class Production(metaclass=PoolMeta):
 
     @classmethod
     def run(cls, productions):
+        to_save = []
         for production in productions:
             production.time_since_quality_control = datetime.now()
-            production.save()
+            to_save.append(production)
+        cls.save(to_save)
         super(Production, cls).run(productions)
 
     @classmethod
@@ -61,7 +64,6 @@ class Production(metaclass=PoolMeta):
         QualityTest = pool.get('quality.test')
 
         for production in productions:
-            document = 'production,%s' % str(production.id)
             tests_not_successful = QualityTest.search([
                 ('state', 'not like', 'successful'),
                 ('document', '=', 'production,%s' % str(production.id)),
@@ -69,16 +71,12 @@ class Production(metaclass=PoolMeta):
             if len(tests_not_successful) != 0:
                 raise UserError(gettext('production_quality_control.'
                         'msg_test_not_successful',
-                        production=production.number))
+                        production=production.rec_name))
 
     @classmethod
-    def create_quality_tests(cls):
+    def create_quality_tests(cls, productions):
         pool = Pool()
         QualityTest = pool.get('quality.test')
-
-        productions = cls.search([
-            ('state','=','running')
-        ])
 
         to_save = []
         for production in productions:
@@ -97,6 +95,16 @@ class Production(metaclass=PoolMeta):
         if to_save:
             QualityTest.save(to_save)
             QualityTest.apply_templates(to_save)
+
+    @classmethod
+    def create_quality_tests_worker(cls):
+        productions = cls.search([
+            ('state','=','running')
+        ])
+
+        for production in productions:
+            with Transaction().set_context(queue_name='production'):
+                cls.__queue__.create_quality_tests([production])
 
 
 class ProductionTemplate(ModelSQL, ModelView):

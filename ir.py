@@ -10,5 +10,5 @@ class Cron(metaclass=PoolMeta):
     def __setup__(cls):
         super().__setup__()
         cls.method.selection.extend([
-                ('production|create_quality_tests', "Create quality control")
+                ('production|create_quality_tests_worker', "Create quality control")
                 ])
