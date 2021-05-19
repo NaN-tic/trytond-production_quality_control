@@ -3,7 +3,6 @@
         <page id="quality" string="Quality">
             <label name="time_since_quality_control"/>
             <field name="time_since_quality_control"/>
-            <field name="quality_templates" colspan="4"/>
             <field name="quality_tests" colspan="4"/>
         </page>
     </xpath>
