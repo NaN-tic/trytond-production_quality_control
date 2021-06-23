@@ -28,7 +28,8 @@ class Production(metaclass=PoolMeta):
             'default_quality_templates': Eval('quality_templates'),
             },
         depends=['quality_templates'])
-    time_since_quality_control = fields.DateTime('Time since quality control')
+    time_since_quality_control = fields.DateTime('Time since quality control',
+        readonly=True)
 
     def get_quality_templates(self, name):
         context = Transaction().context
@@ -57,21 +58,6 @@ class Production(metaclass=PoolMeta):
             to_save.append(production)
         cls.save(to_save)
         super(Production, cls).run(productions)
-
-    @classmethod
-    def done(cls, productions):
-        pool = Pool()
-        QualityTest = pool.get('quality.test')
-
-        for production in productions:
-            tests_not_successful = QualityTest.search([
-                ('state', 'not like', 'successful'),
-                ('document', '=', 'production,%s' % str(production.id)),
-            ])
-            if len(tests_not_successful) != 0:
-                raise UserError(gettext('production_quality_control.'
-                        'msg_test_not_successful',
-                        production=production.rec_name))
 
     @classmethod
     def create_quality_tests(cls, productions):
@@ -115,11 +101,13 @@ class ProductionTemplate(ModelSQL, ModelView):
     "Production Template"
     __name__ = 'product.template-quality.template'
 
-    template = fields.Many2One('product.template', "Template")
+    template = fields.Many2One('product.template', "Template",required=True,
+        ondelete="CASCADE")
     company = fields.Many2One('company.company', "Company", required=True)
     interval = fields.Integer("Interval", required=True,
         help="Interval in minutes")
-    quality_template = fields.Many2One('quality.template', "Quality Template")
+    quality_template = fields.Many2One('quality.template', "Quality Template",
+        required=True)
 
     @classmethod
     def default_company(cls):
