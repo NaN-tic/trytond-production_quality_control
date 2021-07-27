@@ -1,4 +1,4 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -6,13 +6,65 @@ msgctxt "field:product.template,quality_template:"
 msgid "Quality Template"
 msgstr "Plantilla de calidad"
 
+msgctxt "field:product.template,quality_templates:"
+msgid "Quality Templates"
+msgstr "Plantillas de calidad"
+
+msgctxt "field:product.template-quality.template,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:product.template-quality.template,interval:"
+msgid "Interval"
+msgstr "Intervalo"
+
+msgctxt "field:product.template-quality.template,quality_template:"
+msgid "Quality Template"
+msgstr "Plantilla de calidad"
+
+msgctxt "field:product.template-quality.template,template:"
+msgid "Template"
+msgstr "Plantilla"
+
 msgctxt "field:production,quality_template:"
 msgid "Quality Template"
 msgstr "Plantilla de calidad"
 
+msgctxt "field:production,quality_templates:"
+msgid "Quality Templates"
+msgstr "Plantillas de calidad"
+
 msgctxt "field:production,quality_tests:"
 msgid "Quality Tests"
 msgstr "Tests de calidad"
+
+msgctxt "field:production,time_since_quality_control:"
+msgid "Time since quality control"
+msgstr "Tiempo des de control de calidad"
+
+msgctxt "help:product.template-quality.template,interval:"
+msgid "Interval in minutes"
+msgstr "Intervalo en minutos"
+
+msgctxt "model:ir.action,name:act_quality_tests"
+msgid "Quality Tests"
+msgstr "Tests de calidad"
+
+msgctxt "model:ir.message,text:msg_test_not_successful"
+msgid "The production \"%(production)s\" has tests that are not correct."
+msgstr "La producción \"%(production)s\" tiene tests que no son correctos."
+
+msgctxt "model:ir.rule.group,name:rule_product_quality_template"
+msgid "Product Template Quality Template Rule"
+msgstr "Regla de plantillas de producto y plantillas de calidad"
+
+msgctxt "model:product.template-quality.template,name:"
+msgid "Production Template"
+msgstr "Producciones - Plantillas"
+
+msgctxt "selection:ir.cron,method:"
+msgid "Create quality control"
+msgstr "Crear control de calidad"
 
 msgctxt "view:production:"
 msgid "Quality"
