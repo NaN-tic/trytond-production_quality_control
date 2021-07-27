@@ -4,8 +4,7 @@
 <data>
     <xpath expr="/form/notebook/page[@id='general']/field[@name='products']"
             position="before">
-        <label name="quality_template"/>
-        <field name="quality_template"/>
+        <field name="quality_templates" colspan="6"/>
         <newline/>
     </xpath>
 </data>
