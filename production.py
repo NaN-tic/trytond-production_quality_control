@@ -82,7 +82,7 @@ class Production(metaclass=PoolMeta):
 
                     production.time_since_quality_control = datetime.now()
 
-        cls.save(production)
+        cls.save(productions)
         if to_save:
             QualityTest.save(to_save)
             QualityTest.apply_templates(to_save)
