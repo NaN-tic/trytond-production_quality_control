@@ -14,6 +14,12 @@ class Template(metaclass=PoolMeta):
         'template', "Quality Templates")
 
 
+# product.product setup must be executed so template's quality_templates field
+# is created to product.product too
+class Product(metaclass=PoolMeta):
+    __name__ = 'product.product'
+
+
 class Production(metaclass=PoolMeta):
     __name__ = 'production'
 

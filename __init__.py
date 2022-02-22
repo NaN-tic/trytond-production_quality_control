@@ -8,6 +8,7 @@ def register():
     Pool.register(
         ir.Cron,
         production.Template,
+        production.Product,
         production.Production,
         production.ProductionTemplate,
         module='production_quality_control', type_='model')
