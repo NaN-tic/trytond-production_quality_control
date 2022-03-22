@@ -24,7 +24,7 @@ class Production(metaclass=PoolMeta):
     __name__ = 'production'
 
     quality_templates = fields.Function(fields.One2Many(
-            'product.template-quality.template', None, "Quality Templates"), 
+            'product.template-quality.template', None, "Quality Templates"),
         'get_quality_templates')
 
     quality_tests = fields.One2Many('quality.test', 'document', 'Quality Tests',
@@ -107,7 +107,11 @@ class ProductionTemplate(ModelSQL, ModelView):
     __name__ = 'product.template-quality.template'
 
     template = fields.Many2One('product.template', "Template",required=True,
-        ondelete="CASCADE")
+        ondelete="CASCADE",
+        context={
+            'company': Eval('company'),
+            },
+        depends=['company'])
     company = fields.Many2One('company.company', "Company", required=True)
     interval = fields.Integer("Interval", required=True,
         help="Interval in minutes")

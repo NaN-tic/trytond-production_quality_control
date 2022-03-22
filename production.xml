@@ -28,7 +28,7 @@
         </record>
         <record model="ir.rule" id="rule_product_template_quality_template">
             <field name="domain"
-                eval="[('company', '=', Eval('user', {}).get('company', None))]"
+                eval="[('company', 'in', Eval('companies', []))]"
                 pyson="1"/>
             <field name="rule_group" ref="rule_product_quality_template"/>
         </record>
