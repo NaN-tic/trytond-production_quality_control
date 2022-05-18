@@ -46,10 +46,11 @@ class Production(metaclass=PoolMeta):
         return quality_templates
 
     @classmethod
-    def compute_request(cls, product, warehouse, quantity, date, company):
+    def compute_request(cls, product, warehouse, quantity, date, company,
+            order_point=None):
         "Inherited from stock_supply_production"
         production = super(Production, cls).compute_request(product,
-            warehouse, quantity, date, company)
+            warehouse, quantity, date, company, order_point)
         if product.template.quality_templates:
             production.quality_templates = product.template.quality_templates
         return production
