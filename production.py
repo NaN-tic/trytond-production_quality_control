@@ -22,17 +22,15 @@ class Product(metaclass=PoolMeta):
 
 class Production(metaclass=PoolMeta):
     __name__ = 'production'
-
     quality_templates = fields.Function(fields.One2Many(
-            'product.template-quality.template', None, "Quality Templates"),
+        'product.template-quality.template', None, "Quality Templates"),
         'get_quality_templates')
-
-    quality_tests = fields.One2Many('quality.test', 'document', 'Quality Tests',
+    quality_tests = fields.One2Many('quality.test', 'document', "Quality Tests",
         context={
             'default_quality_templates': Eval('quality_templates'),
             },
         depends=['quality_templates'])
-    time_since_quality_control = fields.DateTime('Time since quality control',
+    time_since_quality_control = fields.DateTime("Time since quality control",
         readonly=True)
 
     def get_quality_templates(self, name):
@@ -71,20 +69,18 @@ class Production(metaclass=PoolMeta):
 
         to_save = []
         for production in productions:
-            for quality_template in production.quality_templates:
-                total_time_since_quality_control = (datetime.now() -
-                    production.time_since_quality_control).seconds/60
-                if (total_time_since_quality_control >=
-                        quality_template.interval):
-                    for quality_contol in range(int(
-                            total_time_since_quality_control/
-                            quality_template.interval)):
+            total_time_since_quality_control = (datetime.now() -
+                production.time_since_quality_control).seconds / 60
+            for qt in production.quality_templates:
+                interval = qt.interval
+                if (total_time_since_quality_control >= interval):
+                    start = int(total_time_since_quality_control / interval)
+                    for quality_contol in range(start):
                         test = QualityTest()
                         test.document = production
-                        test.templates = [quality_template.quality_template]
-                        test.company = quality_template.company
+                        test.templates = [qt.quality_template]
+                        test.company = qt.company
                         to_save.append(test)
-
                     production.time_since_quality_control = datetime.now()
 
         cls.save(productions)
@@ -96,7 +92,7 @@ class Production(metaclass=PoolMeta):
     def create_quality_tests_worker(cls):
         productions = cls.search([
             ('state','=','running')
-        ])
+            ])
 
         for production in productions:
             with Transaction().set_context(queue_name='production'):
@@ -106,8 +102,7 @@ class Production(metaclass=PoolMeta):
 class ProductionTemplate(ModelSQL, ModelView):
     "Production Template"
     __name__ = 'product.template-quality.template'
-
-    template = fields.Many2One('product.template', "Template",required=True,
+    template = fields.Many2One('product.template', "Template", required=True,
         ondelete="CASCADE",
         context={
             'company': Eval('company'),
