@@ -105,7 +105,7 @@ class ProductionTemplate(ModelSQL, ModelView):
     template = fields.Many2One('product.template', "Template", required=True,
         ondelete="CASCADE",
         context={
-            'company': Eval('company'),
+            'company': Eval('company', -1),
             },
         depends=['company'])
     company = fields.Many2One('company.company', "Company", required=True)
