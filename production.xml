@@ -23,7 +23,7 @@
 
         <record model="ir.rule.group" id="rule_product_quality_template">
             <field name="name">Product Template Quality Template Rule</field>
-            <field name="model" search="[('model', '=', 'product.template-quality.template')]"/>
+            <field name="model">product.template-quality.template</field>
             <field name="global_p" eval="True"/>
         </record>
         <record model="ir.rule" id="rule_product_template_quality_template">
