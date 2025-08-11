@@ -22,8 +22,8 @@ class Product(metaclass=PoolMeta):
 
 class Production(metaclass=PoolMeta):
     __name__ = 'production'
-    quality_templates = fields.Function(fields.One2Many(
-        'product.template-quality.template', None, "Quality Templates"),
+    quality_templates = fields.Function(fields.Many2Many(
+        'product.template-quality.template', None, None, "Quality Templates"),
         'get_quality_templates')
     quality_tests = fields.One2Many('quality.test', 'document', "Quality Tests",
         context={
